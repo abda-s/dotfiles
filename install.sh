@@ -41,10 +41,6 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PACKAGES=(
     "ags"
     "bash"
-    "btop"
-    "cava"
-    "fastfetch"
-    "ghostty"
     "git"
     "hypr"
     "kitty"
@@ -56,7 +52,6 @@ PACKAGES=(
     "tmux"
     "wallust"
     "waybar"
-    "wezterm"
     "wlogout"
 )
 
