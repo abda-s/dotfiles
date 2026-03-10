@@ -1,0 +1,96 @@
+# Starship Configuration - Dracula Theme
+
+format = """
+[](#bd93f9)\
+$os\
+$username\
+[](bg:#ff79c6 fg:#bd93f9)\
+$directory\
+[](fg:#ff79c6 bg:#8be9fd)\
+$git_branch\
+$git_status\
+[](fg:#8be9fd bg:#282a36)\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+[](fg:#282a36)\
+\n$character"""
+
+[os]
+disabled = false
+style = "bg:#bd93f9 fg:#282a36"
+
+[os.symbols]
+Windows = "󰍲 "
+Ubuntu = "󰕈 "
+SUSE = " "
+Raspbian = "󰐿 "
+Mint = "󰣭 "
+Macos = "󰀵 "
+Manjaro = " "
+Linux = "󰌽 "
+Gentoo = "󰣨 "
+Fedora = "󰣛 "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+Artix = "󰣇 "
+CentOS = " "
+Debian = "󰣚 "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+
+[username]
+show_always = true
+style_user = "bg:#bd93f9 fg:#282a36 bold"
+style_root = "bg:#bd93f9 fg:#282a36 bold"
+format = '[ $user ]($style)'
+
+[directory]
+style = "bg:#ff79c6 fg:#282a36"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#8be9fd fg:#282a36"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#8be9fd fg:#282a36"
+format = '[$all_status$ahead_behind ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#282a36 fg:#bd93f9"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#282a36 fg:#bd93f9"
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#282a36 fg:#bd93f9"
+format = '[ $symbol ($version) ]($style)'
+
+[php]
+symbol = ""
+style = "bg:#282a36 fg:#bd93f9"
+format = '[ $symbol ($version) ]($style)'
+
+[character]
+success_symbol = "[➜](#bd93f9)"
+error_symbol = "[➜](#ff5555)"
