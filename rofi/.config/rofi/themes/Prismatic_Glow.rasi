@@ -47,7 +47,7 @@ configuration {
     hover-bg:                  rgba(0, 238, 255, 0.15);
 }
 
-/*****----- Main Window with Gradient Border -----*****/
+/*****----- Main Window with Cyan Border -----*****/
 window {
     enabled:                     true;
     transparency:                "real";
@@ -63,15 +63,9 @@ window {
     padding:                     0px;
     border:                      3px solid;
     border-radius:               12px;
-    border-color:                gradient;
+    border-color:                @gradient-end;
     cursor:                      "default";
-    
-    /* Apply gradient border using border-image */
     background-color:            @medium-trans;
-    
-    /* Override border with gradient */
-    border:                      3px;
-    border-color:                @gradient-start;
 }
 
 /*****----- Main Box -----*****/
