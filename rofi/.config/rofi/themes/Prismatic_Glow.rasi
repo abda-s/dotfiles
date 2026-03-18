@@ -4,10 +4,10 @@
 configuration {
     modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               "  Apps";
-    display-run:                "  Run";
-    display-filebrowser:        "  Files";
-    display-window:             "  Windows";
+    display-drun:               "Apps";
+    display-run:                "Run";
+    display-filebrowser:        "Files";
+    display-window:             "Windows";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
     hover-select:               true;
@@ -86,7 +86,7 @@ mainbox {
 /*****----- Custom Box for Grid Layout -----*****/
 custombox {
     enabled:                     true;
-    spacing:                     0px;
+    spacing:                     15px;
     background-color:            transparent;
     text-color:                  @text-color;
     orientation:                 horizontal;
@@ -97,6 +97,7 @@ custombox {
 mode-switcher {
     enabled:                     true;
     expand:                      false;
+    width:                       130px;
     orientation:                 vertical;
     spacing:                     5px;
     margin:                      0px;
@@ -117,7 +118,8 @@ button {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      pointer;
-    /* FIX: removed invalid font-weight property; use font: "FontName Bold SIZE" instead */
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
 }
 
 button selected {
@@ -209,7 +211,7 @@ listview {
     fixed-columns:               true;
     
     spacing:                     10px;
-    margin:                      5px;
+    margin:                      0px;
     padding:                     10px;
     border:                      2px solid;
     border-radius:               10px;
