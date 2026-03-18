@@ -19,5 +19,6 @@
 /* note: Main themes in ~/.config/rofi/themes */
 /* You can manually change here or you can use rofi theme selector SUPER SHIFT E */
 
+/* ---- Custom Prismatic Glow Theme (Matches Waybar) ---- */
+@theme "~/.config/rofi/themes/Prismatic_Glow.rasi"
 
-@theme "~/.config/rofi/themes/KooL_style-4.rasi"

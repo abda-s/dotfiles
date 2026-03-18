@@ -1,0 +1,368 @@
+/* ---- 💫 Custom Prismatic Glow - Match Waybar Style 💫 ---- */
+/* Created to match Hyprland Waybar Prismatic Glow theme */
+
+configuration {
+    modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "  Apps";
+    display-run:                "  Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Windows";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    hover-select:               true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
+    cycle:                      true;
+}
+
+/*****----- Prismatic Glow Color Palette -----*****/
+* {
+    /* Main Colors - Match Waybar */
+    background-color:           rgba(0, 0, 0, 0.85);
+    foreground-color:           rgb(0, 238, 255);
+    
+    /* Gradient Colors - Waybar Prismatic Glow */
+    gradient-start:             #FA8BFF;
+    gradient-end:               #2BD2FF;
+    
+    /* Selection Colors - Waybar Cyan */
+    selected-bg:               #2BD2FF;
+    selected-fg:               #000000;
+    
+    /* Alternate Colors */
+    alternate-bg:              rgba(0, 0, 0, 0.7);
+    alternate-fg:              rgb(0, 238, 255);
+    
+    /* Active/Urgent */
+    active-bg:                 #FA8BFF;
+    active-fg:                 #000000;
+    urgent-bg:                 #FF6B6B;
+    urgent-fg:                 #000000;
+    
+    /* Transparency Levels */
+    high-trans:                rgba(0, 0, 0, 0.9);
+    medium-trans:              rgba(0, 0, 0, 0.85);
+    low-trans:                 rgba(0, 0, 0, 0.7);
+    hover-bg:                  rgba(0, 238, 255, 0.15);
+}
+
+/*****----- Main Window with Gradient Border -----*****/
+window {
+    enabled:                     true;
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       850px;
+    height:                      600px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    
+    margin:                      0px;
+    padding:                     0px;
+    border:                      3px solid;
+    border-radius:               12px;
+    border-color:                gradient;
+    cursor:                      "default";
+    
+    /* Apply gradient border using border-image */
+    background-color:            @medium-trans;
+    
+    /* Override border with gradient */
+    border:                      3px;
+    border-color:                @gradient-start;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    spacing:                     10px;
+    margin:                      15px;
+    padding:                     10px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                transparent;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "custombox" ];
+}
+
+/*****----- Custom Box for Grid Layout -----*****/
+custombox {
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+    orientation:                 horizontal;
+    children:                    [ "mode-switcher", "listview" ];
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher {
+    enabled:                     true;
+    expand:                      false;
+    orientation:                 vertical;
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     5px;
+    border:                      2px solid;
+    border-radius:               8px;
+    border-color:                @gradient-end;
+    background-color:            @low-trans;
+    text-color:                  @foreground-color;
+}
+
+button {
+    padding:                     8px 15px;
+    margin:                      2px;
+    border:                      0px solid;
+    border-radius:               6px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      pointer;
+    font-weight:                 bold;
+}
+
+button selected {
+    border:                      0px;
+    border-radius:               6px;
+    background-color:            @gradient-end;
+    text-color:                  @selected-fg;
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px 0px 10px 0px;
+    padding:                     12px 15px;
+    border:                      2px solid;
+    border-radius:               10px;
+    border-color:                @gradient-end;
+    background-color:            @low-trans;
+    text-color:                  @foreground-color;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @gradient-end;
+    margin:                      0px 5px 0px 0px;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    padding:                     0px;
+    expand:                      false;
+    str:                         "🔍";
+    background-color:            transparent;
+    text-color:                  inherit;
+    margin:                      0px 5px 0px 0px;
+}
+
+entry {
+    enabled:                     true;
+    expand:                      true;
+    padding:                     5px 10px;
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+    cursor:                      text;
+    placeholder:                 "Search applications...";
+    placeholder-color:           rgba(0, 238, 255, 0.5);
+    border-radius:               5px;
+    border:                      0px;
+}
+
+/*****----- Message Box -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+}
+
+textbox {
+    padding:                     8px 12px;
+    border:                      0px;
+    border-radius:               6px;
+    background-color:            @low-trans;
+    text-color:                  @foreground-color;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/*****----- Grid Listview -----*****/
+listview {
+    enabled:                     true;
+    
+    /* Grid Layout - 3 columns, 4 rows */
+    columns:                     3;
+    lines:                       4;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     10px;
+    margin:                      5px;
+    padding:                     10px;
+    border:                      2px solid;
+    border-radius:               10px;
+    border-color:                @gradient-start;
+    background-color:            @high-trans;
+    text-color:                  @foreground-color;
+    cursor:                      "default";
+}
+
+/*****----- Scrollbar -----*****/
+scrollbar {
+    handle-width:                4px;
+    handle-color:                @gradient-end;
+    border-radius:               2px;
+    background-color:            @alternate-bg;
+}
+
+/*****----- Element Styling -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      5px;
+    padding:                     10px 8px;
+    border:                      1px solid transparent;
+    border-radius:               8px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+    cursor:                      pointer;
+    orientation:                 vertical;
+}
+
+/* Normal State */
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+}
+
+element normal.urgent {
+    background-color:            @urgent-bg;
+    text-color:                  @urgent-fg;
+}
+
+element normal.active {
+    background-color:            @active-bg;
+    text-color:                  @active-fg;
+}
+
+/* Hover State */
+element normal.hover {
+    background-color:            @hover-bg;
+    text-color:                  @foreground-color;
+    border:                      1px solid @gradient-end;
+}
+
+/* Selected States - Gradient Border for Selected */
+element selected.normal {
+    background-color:            @selected-bg;
+    text-color:                  @selected-fg;
+    border:                      2px solid;
+    border-color:                @gradient-start;
+}
+
+element selected.urgent {
+    background-color:            @selected-bg;
+    text-color:                  @selected-fg;
+    border:                      2px solid;
+    border-color:                @gradient-end;
+}
+
+element selected.active {
+    background-color:            @selected-bg;
+    text-color:                  @selected-fg;
+    border:                      2px solid;
+    border-color:                @gradient-start;
+}
+
+/* Alternate States */
+element alternate.normal {
+    background-color:            @alternate-bg;
+    text-color:                  @alternate-fg;
+}
+
+element alternate.urgent {
+    background-color:            @urgent-bg;
+    text-color:                  @urgent-fg;
+}
+
+element alternate.active {
+    background-color:            @active-bg;
+    text-color:                  @active-fg;
+}
+
+/*****----- Element Icon & Text -----*****/
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    size:                        48px;
+    padding:                     5px;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    font-weight:                 bold;
+}
+
+/*****----- Case Indicator -----*****/
+case-indicator {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @gradient-start;
+}
+
+/*****----- Error Message -----*****/
+error-message {
+    padding:                     15px;
+    border:                      2px solid;
+    border-radius:               8px;
+    border-color:                @gradient-start;
+    background-color:            @medium-trans;
+    text-color:                  @foreground-color;
+}
+
+/*****----- Num Filtered Rows -----*****/
+num-filtered-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  @gradient-end;
+}
+
+textbox-num-sep {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "/";
+    background-color:            transparent;
+    text-color:                  @foreground-color;
+}
+
+num-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  @gradient-end;
+}
