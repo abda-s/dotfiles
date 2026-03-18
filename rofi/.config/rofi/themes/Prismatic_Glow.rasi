@@ -4,10 +4,10 @@
 configuration {
     modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               "  Apps";
-    display-run:                "  Run";
-    display-filebrowser:        "  Files";
-    display-window:             "  Windows";
+    display-drun:               "  Apps";
+    display-run:                "  Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Windows";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
     hover-select:               true;
@@ -20,26 +20,27 @@ configuration {
 * {
     /* Main Colors - Match Waybar */
     background-color:           rgba(0, 0, 0, 0.85);
-    foreground-color:           rgb(0, 238, 255);
-    
+    /* FIX: renamed foreground-color → text-color (valid Rofi variable) */
+    text-color:                 rgb(0, 238, 255);
+
     /* Gradient Colors - Waybar Prismatic Glow */
     gradient-start:             #FA8BFF;
     gradient-end:               #2BD2FF;
-    
+
     /* Selection Colors - Waybar Cyan */
     selected-bg:               #2BD2FF;
     selected-fg:               #000000;
-    
+
     /* Alternate Colors */
     alternate-bg:              rgba(0, 0, 0, 0.7);
     alternate-fg:              rgb(0, 238, 255);
-    
+
     /* Active/Urgent */
     active-bg:                 #FA8BFF;
     active-fg:                 #000000;
     urgent-bg:                 #FF6B6B;
     urgent-fg:                 #000000;
-    
+
     /* Transparency Levels */
     high-trans:                rgba(0, 0, 0, 0.9);
     medium-trans:              rgba(0, 0, 0, 0.85);
@@ -58,7 +59,7 @@ window {
     height:                      600px;
     x-offset:                    0px;
     y-offset:                    0px;
-    
+
     margin:                      0px;
     padding:                     0px;
     border:                      3px solid;
@@ -87,7 +88,7 @@ custombox {
     enabled:                     true;
     spacing:                     0px;
     background-color:            transparent;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
     orientation:                 horizontal;
     children:                    [ "mode-switcher", "listview" ];
 }
@@ -104,7 +105,7 @@ mode-switcher {
     border-radius:               8px;
     border-color:                @gradient-end;
     background-color:            @low-trans;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
 }
 
 button {
@@ -116,7 +117,7 @@ button {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      pointer;
-    font-weight:                 bold;
+    /* FIX: removed invalid font-weight property; use font: "FontName Bold SIZE" instead */
 }
 
 button selected {
@@ -136,7 +137,7 @@ inputbar {
     border-radius:               10px;
     border-color:                @gradient-end;
     background-color:            @low-trans;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
 
@@ -162,7 +163,7 @@ entry {
     expand:                      true;
     padding:                     5px 10px;
     background-color:            transparent;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
     cursor:                      text;
     placeholder:                 "Search applications...";
     placeholder-color:           rgba(0, 238, 255, 0.5);
@@ -179,7 +180,7 @@ message {
     border-radius:               8px;
     border-color:                transparent;
     background-color:            transparent;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
 }
 
 textbox {
@@ -187,7 +188,7 @@ textbox {
     border:                      0px;
     border-radius:               6px;
     background-color:            @low-trans;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
     vertical-align:              0.5;
     horizontal-align:            0.5;
 }
@@ -195,7 +196,7 @@ textbox {
 /*****----- Grid Listview -----*****/
 listview {
     enabled:                     true;
-    
+
     /* Grid Layout - 3 columns, 4 rows */
     columns:                     3;
     lines:                       4;
@@ -206,7 +207,7 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
+
     spacing:                     10px;
     margin:                      5px;
     padding:                     10px;
@@ -214,7 +215,7 @@ listview {
     border-radius:               10px;
     border-color:                @gradient-start;
     background-color:            @high-trans;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
     cursor:                      "default";
 }
 
@@ -232,19 +233,19 @@ element {
     spacing:                     10px;
     margin:                      5px;
     padding:                     10px 8px;
-    border:                      1px solid transparent;
+    border:                      0px solid;
     border-radius:               8px;
-    border-color:                transparent;
-    background-color:            transparent;
-    text-color:                  @foreground-color;
+    border-color:                rgba(0, 0, 0, 0);
+    background-color:            rgba(0, 0, 0, 0);
+    text-color:                  @text-color;
     cursor:                      pointer;
     orientation:                 vertical;
 }
 
 /* Normal State */
 element normal.normal {
-    background-color:            transparent;
-    text-color:                  @foreground-color;
+    background-color:            rgba(0, 0, 0, 0);
+    text-color:                  @text-color;
 }
 
 element normal.urgent {
@@ -257,12 +258,9 @@ element normal.active {
     text-color:                  @active-fg;
 }
 
-/* Hover State */
-element normal.hover {
-    background-color:            @hover-bg;
-    text-color:                  @foreground-color;
-    border:                      1px solid @gradient-end;
-}
+/* FIX: removed invalid `element normal.hover` block — "hover" is not a valid
+   state modifier in Rofi's theming engine. Hover styling is handled via
+   the element's own hover property or not supported as a state selector. */
 
 /* Selected States - Gradient Border for Selected */
 element selected.normal {
@@ -318,7 +316,7 @@ element-text {
     cursor:                      inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
-    font-weight:                 bold;
+    /* FIX: removed invalid font-weight property; use font: "FontName Bold SIZE" instead */
 }
 
 /*****----- Case Indicator -----*****/
@@ -335,7 +333,7 @@ error-message {
     border-radius:               8px;
     border-color:                @gradient-start;
     background-color:            @medium-trans;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
 }
 
 /*****----- Num Filtered Rows -----*****/
@@ -351,7 +349,7 @@ textbox-num-sep {
     expand:                      false;
     str:                         "/";
     background-color:            transparent;
-    text-color:                  @foreground-color;
+    text-color:                  @text-color;
 }
 
 num-rows {

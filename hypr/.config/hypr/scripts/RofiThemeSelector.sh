@@ -1,19 +1,93 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 # Rofi Themes - Script to preview and apply themes by live-reloading the config.
 
 # --- Configuration ---
 ROFI_THEMES_DIR_CONFIG="$HOME/.config/rofi/themes"
 ROFI_THEMES_DIR_LOCAL="$HOME/.local/share/rofi/themes"
 ROFI_CONFIG_FILE="$HOME/.config/rofi/config.rasi"
-ROFI_THEME_FOR_THIS_SCRIPT="$HOME/.config/rofi/config-rofi-theme.rasi" # A separate rofi theme for the picker itself
+ROFI_THEME_FOR_THIS_SCRIPT="$HOME/.config/rofi/config-rofi-theme.rasi" # A separate rofi theme for picker itself
 IDIR="$HOME/.config/swaync/images"                                     # For notifications
+VALIDATOR_SCRIPT="$HOME/.config/rofi/validate-theme.sh"
 
 # --- Helper Functions ---
+
+# Function to validate Rofi theme
+validate_theme() {
+  local theme_path="$1"
+  
+  if [ ! -f "$theme_path" ]; then
+    return 1
+  fi
+  
+  # Run validation script
+  if [ -x "$VALIDATOR_SCRIPT" ]; then
+    "$VALIDATOR_SCRIPT" "$theme_path"
+    local validation_result=$?
+    
+    if [ $validation_result -ne 0 ]; then
+      return 1
+    fi
+  fi
+  
+  return 0
+}
 
 # Function to send a notification
 notify_user() {
   notify-send -u low -i "$1" "$2" "$3"
+}
+
+# Function to apply selected rofi theme to main config file
+apply_rofi_theme_to_config() {
+  local theme_name_to_apply="$1"
+
+  # Find full path of theme file
+  local theme_path
+  if [[ -f "$ROFI_THEMES_DIR_CONFIG/$theme_name_to_apply" ]]; then
+    theme_path="$ROFI_THEMES_DIR_CONFIG/$theme_name_to_apply"
+  elif [[ -f "$ROFI_THEMES_DIR_LOCAL/$theme_name_to_apply" ]]; then
+    theme_path="$ROFI_THEMES_DIR_LOCAL/$theme_name_to_apply"
+  else
+    notify_user "$IDIR/error.png" "Error" "Theme file not found: $theme_name_to_apply"
+    return 1
+  fi
+
+  # Validate theme before applying
+  if ! validate_theme "$theme_path"; then
+    notify_user "$IDIR/error.png" "Theme Invalid" "$theme_name_to_apply has syntax errors. Choose another theme."
+    return 1
+  fi
+
+  # Use ~ for home directory in config path
+  local theme_path_with_tilde="~${theme_path#$HOME}"
+
+  # Create a temporary file to safely edit the config
+  local temp_rofi_config_file
+  temp_rofi_config_file=$(mktemp)
+  cp "$ROFI_CONFIG_FILE" "$temp_rofi_config_file"
+
+  # Comment out any existing @theme entry
+  sed -i -E 's/^(\s*@theme)/\\/\\/\1/' "$temp_rofi_config_file"
+
+  # Add new @theme entry at the end of the file
+  echo "@theme \"$theme_path_with_tilde\"" >>"$temp_rofi_config_file"
+
+  # Overwrite the original config file
+  cp "$temp_rofi_config_file" "$ROFI_CONFIG_FILE"
+  rm "$temp_rofi_config_file"
+
+  # Prune old commented-out theme lines to prevent clutter
+  local max_lines=10
+  local total_lines=$(grep -c '^//\s*@theme' "$ROFI_CONFIG_FILE")
+  if [ "$total_lines" -gt "$max_lines" ]; then
+    local excess=$((total_lines - max_lines))
+    for ((i = 1; i <= excess; i++)); do
+      sed -i '0,/^\s*\/\/@theme/s///' "$ROFI_CONFIG_FILE"
+    done
+  fi
+
+  return 0
 }
 
 # Function to apply the selected rofi theme to the main config file
@@ -109,8 +183,8 @@ while true; do
   # Apply the theme for preview
   if ! apply_rofi_theme_to_config "$theme_to_preview_now"; then
     echo "$original_rofi_config_content_backup" >"$ROFI_CONFIG_FILE"
-    notify_user "$IDIR/error.png" "Preview Error" "Failed to apply $theme_to_preview_now. Reverted."
-    exit 1
+    # Theme validation or application failed - skip to next iteration to allow theme selection
+    continue
   fi
 
   # Prepare theme list for Rofi
