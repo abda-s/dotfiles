@@ -239,7 +239,6 @@ element {
     background-color:            rgba(0, 0, 0, 0);
     text-color:                  @text-color;
     cursor:                      pointer;
-    orientation:                 vertical;
 }
 
 /* Normal State */
@@ -315,8 +314,7 @@ element-text {
     highlight:                   inherit;
     cursor:                      inherit;
     vertical-align:              0.5;
-    horizontal-align:            0.5;
-    /* FIX: removed invalid font-weight property; use font: "FontName Bold SIZE" instead */
+    horizontal-align:            0.0;
 }
 
 /*****----- Case Indicator -----*****/
