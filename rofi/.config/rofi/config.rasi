@@ -21,4 +21,3 @@
 
 /* ---- Custom Prismatic Glow Theme (Matches Waybar) ---- */
 @theme "~/.config/rofi/themes/Prismatic_Glow.rasi"
-
