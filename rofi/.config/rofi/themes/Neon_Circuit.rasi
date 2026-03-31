@@ -1,0 +1,276 @@
+/* ---- 💫 Neon Circuit Rofi Theme 💫 ---- */
+/* Matches waybar/wlogout style with gradient selection */
+
+configuration {
+    modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               "Apps";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
+    cycle:                      true;
+}
+
+/*****----- Waybar Color Palette -----*****/
+* {
+    background-color:           rgba(49, 50, 68, 0.95);
+    text-color:                 #b4befe;
+
+    selected-bg:                #313244;
+    selected-fg:                #1e1e2e;
+
+    alternate-bg:               rgba(49, 50, 68, 0.5);
+    alternate-fg:               #b4befe;
+
+    active-bg:                  #cba6f7;
+    active-fg:                  #1e1e2e;
+
+    urgent-bg:                  #f38ba8;
+    urgent-fg:                  #1e1e2e;
+
+    hover-bg:                   rgba(245, 194, 231, 0.2);
+    hover-fg:                   #b4befe;
+
+    border-color:               #b4befe;
+    gradient-start:             #89b4fa;
+    gradient-end:               #cba6f7;
+}
+
+/*****----- Main Window -----*****/
+window {
+    enabled:                     true;
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       700px;
+    height:                      500px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                #b4befe;
+    cursor:                      "default";
+    background-color:            rgba(49, 50, 68, 0.95);
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    spacing:                     15px;
+    margin:                      15px;
+    padding:                     15px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                transparent;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     12px 20px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                #b4befe;
+    background-color:            rgba(49, 50, 68, 0.8);
+    text-color:                  #b4befe;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    padding:                     0px;
+    expand:                      false;
+    str:                         "󰍳";
+    background-color:            transparent;
+    text-color:                  #b4befe;
+    margin:                      0px 8px 0px 0px;
+    font-size:                   20px;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+entry {
+    enabled:                     true;
+    expand:                      true;
+    padding:                     5px 10px;
+    background-color:            transparent;
+    text-color:                  #b4befe;
+    cursor:                      text;
+    placeholder:                 "Search applications...";
+    placeholder-color:           rgba(180, 190, 254, 0.5);
+    border-radius:               0px;
+    border:                      0px;
+}
+
+/*****----- Vertical Listview -----*****/
+listview {
+    enabled:                     true;
+
+    lines:                       10;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+
+    spacing:                     8px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                rgba(180, 190, 254, 0.3);
+    background-color:            rgba(49, 50, 68, 0.5);
+    text-color:                  #b4befe;
+    cursor:                      "default";
+}
+
+/*****----- Scrollbar -----*****/
+scrollbar {
+    enabled:                     true;
+    width:                       8px;
+    handle-width:                6px;
+    handle-color:                #b4befe;
+    border-radius:               3px;
+    background-color:            rgba(49, 50, 68, 0.5);
+    border:                      1px solid;
+    border-color:                rgba(180, 190, 254, 0.3);
+}
+
+/*****----- Element Styling -----*****/
+element {
+    enabled:                     true;
+    spacing:                     12px;
+    margin:                      4px;
+    padding:                     10px 12px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                transparent;
+    background-color:            rgba(49, 50, 68, 0.3);
+    text-color:                  #b4befe;
+    cursor:                      pointer;
+}
+
+element normal.normal {
+    background-color:            rgba(49, 50, 68, 0.3);
+    text-color:                  #b4befe;
+    border-color:                transparent;
+}
+
+element normal.urgent {
+    background-color:            rgba(243, 139, 168, 0.3);
+    text-color:                  #f38ba8;
+    border-color:                #f38ba8;
+}
+
+element normal.active {
+    background-color:            rgba(203, 166, 247, 0.3);
+    text-color:                  #cba6f7;
+    border-color:                #cba6f7;
+}
+
+element selected.normal {
+    background-color:            #cba6f7;
+    text-color:                  #1e1e2e;
+    border:                      2px solid;
+    border-color:                #b4befe;
+}
+
+element selected.urgent {
+    background-color:            #f38ba8;
+    text-color:                  #1e1e2e;
+    border:                      2px solid;
+    border-color:                #fab387;
+}
+
+element selected.active {
+    background-color:            #b4befe;
+    text-color:                  #1e1e2e;
+    border:                      2px solid;
+    border-color:                #cba6f7;
+}
+
+element alternate.normal {
+    background-color:            rgba(49, 50, 68, 0.4);
+    text-color:                  #b4befe;
+    border-color:                transparent;
+}
+
+element alternate.urgent {
+    background-color:            rgba(243, 139, 168, 0.4);
+    text-color:                  #f38ba8;
+    border-color:                #f38ba8;
+}
+
+element alternate.active {
+    background-color:            rgba(203, 166, 247, 0.4);
+    text-color:                  #cba6f7;
+    border-color:                #cba6f7;
+}
+
+/*****----- Element Icon & Text -----*****/
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    size:                        36px;
+    padding:                     0px;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   #b4befe;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Message Box -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  #b4befe;
+}
+
+textbox {
+    padding:                     8px 12px;
+    border:                      0px;
+    border-radius:               8px;
+    background-color:            rgba(49, 50, 68, 0.5);
+    text-color:                  #b4befe;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/*****----- Case Indicator -----*****/
+case-indicator {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  #cba6f7;
+}
+
+/*****----- Error Message -----*****/
+error-message {
+    padding:                     15px;
+    border:                      2px solid;
+    border-radius:               8px;
+    border-color:                #f38ba8;
+    background-color:            rgba(243, 139, 168, 0.2);
+    text-color:                  #f38ba8;
+}
