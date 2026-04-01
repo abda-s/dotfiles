@@ -132,13 +132,14 @@ tooltip {
 #custom-weather.clearNight,
 #custom-weather.cloudyFoggyDay,
 #custom-weather.cloudyFoggyNight,
-#custom-weather.default, 
+#custom-weather.default,
 #custom-weather.rainyDay,
 #custom-weather.rainyNight,
 #custom-weather.severe,
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
-#custom-weather.sunnyDay {
+#custom-weather.sunnyDay,
+#custom-prayer {
     color: @main-fg;
     background: @main-bg;
     opacity: 1;
@@ -409,6 +410,19 @@ tooltip {
     border-right-style: none;
     border-color: #E06C75;
     color: #E06C75;
+    margin-right: 5px;
+}
+
+#custom-prayer {
+    border-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-color: #cba6f7;
+    color: #cba6f7;
     margin-right: 5px;
 }
 

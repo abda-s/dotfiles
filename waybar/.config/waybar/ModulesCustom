@@ -286,5 +286,13 @@
 "custom/arrow10": {
 	"format": "",
 	"tooltip": false
+},
+
+"custom/prayer": {
+	"format": "{}",
+	"return-type": "json",
+	"interval": 60,
+	"exec": "$HOME/.config/hypr/UserScripts/PrayerTimes.py",
+	"tooltip": true,
 }
 }
