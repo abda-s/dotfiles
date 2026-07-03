@@ -299,7 +299,8 @@
 	"max-length": 24,
 	"format-icons": [
 		"󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
-	]
+	],
+	"on-click-right": "$HOME/.config/hypr/scripts/RofiWifi.sh"
 },
 
 "power-profiles-daemon": {

@@ -291,7 +291,7 @@
 "custom/prayer": {
 	"format": "{}",
 	"return-type": "json",
-	"interval": 60,
+	"interval": 30,
 	"exec": "$HOME/.config/hypr/UserScripts/PrayerTimes.py",
 	"tooltip": true,
 }
